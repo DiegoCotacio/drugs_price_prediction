@@ -17,7 +17,7 @@ from src.components.hyp_optimizer import Hyperparameter_Optimization
 from src.components.reports import run_data_integrity_report,run_validation_train_test_split_report, run_validate_model_performance
 from src.exception import CustomException
 from src.logger import logging
-
+from src.utils import save_object
 
 #************** START THE TRAINING PIPELINE  *******************
 
@@ -104,14 +104,14 @@ def train_model(
             
         model.fit(X_train, y_train)
             
-        #Save de model
-        models_folder = "../artifacts" 
-        os.makedirs(models_folder, exist_ok=True)
-        model_file = os.path.join(models_folder, "model.joblib")
-        joblib.dump(model, model_file)
+        trained_model_file_path = os.path.join("artifacts", "model.pkl")
+        save_object(
+                file_path = trained_model_file_path,
+                obj = model
+            )
 
         # Registro del modelo en MLflow
-        mlflow.log_artifact(model_file)
+        mlflow.log_artifact(trained_model_file_path)
 
         #model validation
         model_performance_report_path = run_validate_model_performance(X_train, y_train, X_test, y_test, model)
