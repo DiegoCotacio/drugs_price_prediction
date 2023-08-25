@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/diego/OneDrive/Escritorio/mlops_projects/mlops/rurall_prueba/mlruns/661048831854206381/5524cb3d33a04dcfa7d507ab7f9a3dca/artifacts
+end_time: 1692975659059
+entry_point_name: ''
+experiment_id: '661048831854206381'
+lifecycle_stage: active
+run_id: 5524cb3d33a04dcfa7d507ab7f9a3dca
+run_name: Catboost Model Tracking
+run_uuid: 5524cb3d33a04dcfa7d507ab7f9a3dca
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1692975238897
+status: 3
+tags: []
+user_id: diego

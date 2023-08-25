@@ -71,7 +71,7 @@ def index() -> HTMLResponse:
 async def predict(
     response: Response,
     features_item: Features,
-    ) -> float:
+    ) -> JSONResponse:
 
     try:
         #input_dict = jsonable_encoder(input_data)
@@ -86,7 +86,11 @@ async def predict(
         prediction = model.predict(input_df)[0].item()
         original_row['prediction'] = prediction
 
-        return prediction
+        # Devuelve un objeto JSON con la clave "prediction"
+        response_data = {'prediction': prediction}
+        return JSONResponse(content=response_data)
+
+        #return prediction
 
     except Exception as e:
         response.status_code = 500
@@ -124,7 +128,7 @@ async def batch_predict(file: UploadFile,response: Response):
         return JSONResponse(content={'error_msg': str(e)})
 
 
-
+#-------------------------- Endpoint 2. Batch Inference Service
 
 @app.post("/batch_predict_pipeline")
 async def batch_inference_pipeline(input_list: List[Features],response: Response):

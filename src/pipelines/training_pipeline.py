@@ -83,7 +83,7 @@ def train_model(
 
         hy_opt = Hyperparameter_Optimization(X_train, y_train, X_test, y_test)
         study = optuna.create_study(direction = "maximize")
-        study.optimize(hy_opt.optimize_catboost_regressor, n_trials = 2)
+        study.optimize(hy_opt.optimize_catboost_regressor, n_trials = 30)
         trial = study.best_trial
 
         n_estimators = trial.params["n_estimators"]
@@ -104,7 +104,7 @@ def train_model(
             
         model.fit(X_train, y_train)
             
-        trained_model_file_path = os.path.join("artifacts", "model.pkl")
+        trained_model_file_path = os.path.join("api_artifacts", "model.pkl")
         save_object(
                 file_path = trained_model_file_path,
                 obj = model
@@ -157,7 +157,7 @@ def train_pipeline():
     experiment_name = "Training Pipeline for Catboost Model"
     mlflow.set_experiment(experiment_name)
 
-    with mlflow.start_run(run_name = "Catboost Experiment Global"):
+    with mlflow.start_run(run_name = "Catboost Model Tracking"):
         df_path = ingest_data()
         X_train, X_test, y_train, y_test = transform_data(df_path)
         model = train_model(X_train, X_test, y_train, y_test)

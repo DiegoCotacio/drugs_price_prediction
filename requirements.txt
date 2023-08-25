@@ -20,5 +20,4 @@ python-multipart
 #google-cloud-bigquery
 #google-cloud
 #db-dtypes
-
--e .
+#-e .

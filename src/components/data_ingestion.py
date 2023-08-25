@@ -9,7 +9,7 @@ from src.components.preprocessor import  Preprocessor
 
 @dataclass
 class DataIngestionConfig:
-    raw_data_path: str = os.path.join('artifacts', "raw_data.csv")
+    raw_data_path: str = os.path.join('data', "raw_data.csv")
 
 
 class DataIngestion:
@@ -58,10 +58,11 @@ class DataIngestion:
         except Exception as e:
             raise CustomException(e, sys)
 
-if __name__=="__main__":
-    obj = DataIngestion()
-    df_path = obj.initiate_data_ingestion()
 
-    data_transformation = Preprocessor()
-    train = data_transformation.preprocess_dataframe(df_path)
+#if __name__=="__main__":
+#    obj = DataIngestion()
+#    df_path = obj.initiate_data_ingestion()
+
+#    data_transformation = Preprocessor()
+#    train = data_transformation.preprocess_dataframe(df_path)
      

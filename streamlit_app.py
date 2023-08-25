@@ -14,12 +14,19 @@ BATCH_PREDICT_ENDPOINT = '/online_batch_predict'
 
 
 def predict_input(input_data):
-    response = requests.post(PREDICT_ENDPOINT, json = input_data)
+    response = requests.post(PREDICT_ENDPOINT, json=input_data)
+    
     if response.status_code == 200:
-        return response.json()['prediction']
+        response_data = response.json()
+        if 'prediction' in response_data:
+            return response_data['prediction']
+        else:
+            print("La clave 'prediction' no está presente en la respuesta JSON")
+            return None
     else:
+        print("Error al obtener una estimación de la API")
         return None
-
+    
 def run():
     #Instanciar las imagenes
     #from PIL import Image
@@ -37,44 +44,44 @@ def run():
     st.sidebar.success("")
     #st.sidebar.image(image_hospital)
 
+# ------ ONLINE PREDICTION
 
     if add_selectbox == "Online":
 
-        drug_id= st.selectbox('drug_id',['1_test','2_test','9_test', '14_test', '12_test', '10_test'])
+        drug_id= st.selectbox("drug_id",["1_test","2_test","9_test", "14_test", "12_test", "10_test"])
 
-        description = st.selectbox('description', ["plaquette(s) thermoformée(s) PVC PVDC aluminium de 30 comprimé(s)",
+        description = st.selectbox("description", ["plaquette(s) thermoformée(s) PVC PVDC aluminium de 30 comprimé(s)",
                                                     "plaquette(s) thermoformée(s) PVC PVDC aluminium de 90 comprimé(s)",
                                                     "plaquette(s) thermoformée(s) PVC-Aluminium de 30 comprimé(s)",
                                                     "plaquette(s) thermoformée(s) aluminium de 90 comprimé(s)",
                                                     "1 seringue(s) préremplie(s) en verre de 20  ml"])
         
-        administrative_status = st.selectbox('administrative_status', ['Présentation active', 'Présentation abrogée'])
-        
-        marketing_status = st.selectbox('marketing_status', ["Déclaration d'arrêt de commercialisation",
+        administrative_status = st.selectbox("administrative_status", ["Présentation active", "Présentation abrogée"])
+
+        marketing_status = st.selectbox("marketing_status", ["Déclaration d'arrêt de commercialisation",
                                                                 "Déclaration de commercialisation","Arrêt de commercialisation (le médicament n'a plus d'autorisation)"])
+        approved_for_hospital_use = st.selectbox("approved_for_hospital_use", ["non", "oui"])
+
+        reimbursement_rate = st.selectbox("reimbursement_rate", ["65%", "30%", "15%", "100%"])
+
+        dosage_form = st.selectbox("dosage_form", ["comprimé pelliculé", "comprimé sécable", "comprimé", "gélule"])
+
+        route_of_administration = st.selectbox("route_of_administration", ["orale", "intraveineuse", "cutanée", "ophtalmique","intramusculaire"])
         
-        approved_for_hospital_use = st.selectbox('approved_for_hospital', ['non', 'oui'])
+        marketing_authorization_status =st.selectbox("marketing_authorization_status",["Autorisation active", "Autorisation abrogée", "Autorisation archivée",
+                                           "Autorisation retirée","Autorisation suspendue"])
         
-        reimbursement_rate = st.selectbox('reimbursement_rate', ['65%', '30%', '15%', '100%'])
-        
-        dosage_form = st.selectbox('dosage_form', ['comprimé pelliculé', 'comprimé sécable', 'comprimé', 'gélule'])
-        
-        route_of_administration = st.selectbox('route_of_administration', ['orale ', 'intraveineuse', 'cutanée', 'ophtalmique','intramusculaire'])
-        
-        marketing_authorization_status =st.selectbox('marketing_authorization_status',['Autorisation active', 'Autorisation abrogée', 'Autorisation archivée',
-                                           'Autorisation retirée','Autorisation suspendue'])
-        
-        marketing_declaration_date = st.selectbox('declaration_date ',[20130101,20120101,20110101,20140101,20020101,
+        marketing_declaration_date = st.selectbox("marketing_declaration_date",[20130101,20120101,20110101,20140101,20020101,
                                                                        20060101,20070101,20150101,20090101,20050101,20040101])
         
-        marketing_authorization_date = st.selectbox('authorization_date',[20080101,19970101,20060101,20000101,20110101,20130101,
+        marketing_authorization_date = st.selectbox("marketing_authorization_date",[20080101,19970101,20060101,20000101,20110101,20130101,
                                                                         20020101,19930101,20010101,20150101,20040101,20100101,19940101])
         
-        marketing_authorization_process = st.selectbox('authorization_process',["Procédure de reconnaissance mutuelle","Procédure nationale",
+        marketing_authorization_process = st.selectbox("marketing_authorization_process",["Procédure de reconnaissance mutuelle","Procédure nationale",
                                                "Procédure centralisée","Procédure décentralisée","Autorisation d'importation parallèle"])
         
-        pharmaceutical_companies = st.selectbox('pharmaceutical_company', [' TEVA SANTE', ' SANOFI AVENTIS FRANCE', ' MYLAN SAS', ' BIOGARAN',
-                                    ' EG LABO - LABORATOIRES EUROGENERICS'])
+        pharmaceutical_companies = st.selectbox("pharmaceutical_companies", [" TEVA SANTE", " SANOFI AVENTIS FRANCE", " MYLAN SAS", " BIOGARAN",
+                                    " EG LABO - LABORATOIRES EUROGENERICS"])
 
         input_data = {
             'drug_id': drug_id, 
@@ -89,7 +96,7 @@ def run():
             'marketing_declaration_date': marketing_declaration_date,
             'marketing_authorization_date':  marketing_authorization_date,
             'marketing_authorization_process': marketing_authorization_process,
-            'pharmaceutical_companies': pharmaceutical_companies
+            'pharmaceutical_companies': pharmaceutical_companies,
             }
 
         if st.button("Estimar precio del farmaco"):
@@ -100,6 +107,8 @@ def run():
                 output = '$'+str(output)
                 st.success('El valor estimado es de {}'.format(output))
         
+
+# ------ ONLINE BATCH PREDICTION
 
     if add_selectbox == 'Batch':
         file_upload = st.file_uploader("Cargue un archivo csv para realizar estimaciones", type=['csv'])

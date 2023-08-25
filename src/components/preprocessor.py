@@ -18,7 +18,7 @@ from src.logger import logging
 
 @dataclass
 class DataTransformationConfig:
-    proc_data_path = os.path.join('artifacts', 'processed_data.csv')
+    proc_data_path = os.path.join('data', 'processed_data.csv')
 
 
 class PreprocessData:
