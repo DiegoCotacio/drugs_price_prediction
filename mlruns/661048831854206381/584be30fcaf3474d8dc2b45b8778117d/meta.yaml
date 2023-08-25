@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/diego/OneDrive/Escritorio/mlops_projects/mlops/rurall_prueba/mlruns/661048831854206381/584be30fcaf3474d8dc2b45b8778117d/artifacts
+end_time: 1692912737468
+entry_point_name: ''
+experiment_id: '661048831854206381'
+lifecycle_stage: active
+run_id: 584be30fcaf3474d8dc2b45b8778117d
+run_name: Catboost Experiment Global
+run_uuid: 584be30fcaf3474d8dc2b45b8778117d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1692912736593
+status: 4
+tags: []
+user_id: diego

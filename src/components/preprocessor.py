@@ -130,7 +130,7 @@ class FeatureEngineering:
             raise e
         
 
-    def drop_columns(self, df: pd.DataFrame) -> pd.DataFrame:
+    def drop_columns(self, df: pd.DataFrame): # -> pd.DataFrame:
         try:
             df = df.drop(["authorization_date", "marketing_authorization_date",
                       "declaration_date", "marketing_declaration_date",
@@ -164,16 +164,18 @@ class Preprocessor(PreprocessData, FeatureEngineering):
 
         logging.info("Data preprocessing is completed")
         return (
-                self.data_transformation_config. proc_data_path
+                self.data_transformation_config.proc_data_path
             )
 
 
 class DataSpliter:
     
-    def divide_data(self, df: pd.DataFrame) -> Union[pd.DataFrame, pd.Series]:
+    def divide_data(self, df_proc) -> Union[pd.DataFrame, pd.Series]:
         """
         It divides the data into train and test data.
         """
+        df = pd.read_csv(df_proc)
+
         try:
             X = df.drop("price", axis=1)
             y = df["price"]

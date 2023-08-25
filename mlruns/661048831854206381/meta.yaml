@@ -1,0 +1,6 @@
+artifact_location: file:///C:/Users/diego/OneDrive/Escritorio/mlops_projects/mlops/rurall_prueba/mlruns/661048831854206381
+creation_time: 1692912327687
+experiment_id: '661048831854206381'
+last_update_time: 1692912327687
+lifecycle_stage: active
+name: Training Pipeline for Catboost Model
