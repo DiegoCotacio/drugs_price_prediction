@@ -1,6 +1,25 @@
 # Prueba técnica 
 
-Hola, acontinuación podras encontrar las instrucciones para generar inferencias a partir del modelo entrenado.
+## Resumen:
+
+En este repo encontraras el codigo de un servicio automatizado de inferencia en batch para predecir precios de Farmacos.
+
+Es una solución end-to-end que aborda una estrategia de pipelines:
+
+* **Training Pipeline**: automatiza la extracción, entrenamiento, tracking y despliegue a producción del modelo a traves de un ci/cd pipeline ejecutado desde un trigger de Github Actions.
+
+El modelo se despliega bajo una infraestructura serverless para ser consumido como REST API en online y batch modes.
+(Se emplea FastAPI, Docker, AWS ECR, Lambda Functions y API Gateway para el despliegue.)
+
+* **Batch Inference Pipeline**: automatiza la generación de predicciones a partir de un schedule del pipeline de inferencia en Github Actions.
+
+*nota:* todos los pipelines se orquestan con Prefect.
+
+* **(plus) Online Predictions**: Alternativamente se sirve la API en una UI Webapp para permitir realizar predicciones individuales o de carga masiva vía CSV.
+
+## Instrucciones:
+
+A continuación podras encontrar las instrucciones para generar inferencias a partir del modelo entrenado.
 Sigue los siguientes pasos:
 
 ### 1. Clona el Repositorio
@@ -48,7 +67,7 @@ git clone https://github.com/DiegoCotacio/drugs_price_prediction.git
  ┗ 📝 setup.py
 ```
 
-### 3. Instala las dependencias
+### 2. Instala las dependencias
 
 ```bash
 pip install -r requirements.txt
@@ -76,12 +95,12 @@ streamlit run streamlit_app.py
 2. Para la opción de "Batch", carga el archivo ui_test.csv desde la carpeta "/data da click en "Estimar precio del farmaco".
 
 
-### Reentrena un nuevo modelo a traves de un pipeline de reentrenamiento 
+### 4. Reentrena un nuevo modelo a traves de un pipeline de reentrenamiento 
 
-Puedes reentrenar un nuevo modelo a partir de un pipelie de reentrenamiento que retorna, ademas del modelo reentrenado, reportes de calidad de datos, drift, y evaluación a profundidad del modelo. De igual forma trackea todas 
-las metricas y artefactos en MLFlow.
+Puedes reentrenar un nuevo modelo a partir de un pipeline de reentrenamiento que retorna, ademas del modelo reentrenado, reportes de calidad de datos, drift, y evaluación a profundidad del modelo. De igual forma trackea todas las metricas y artefactos en MLFlow.
 
 Ejecuta el siguiente codigo para entrenar un nuevo modelo.
+
 *Nota*: Si quieres realizar predicciones con este nuevo modelo, debes marcar las url de AWS y desmarcar las rutas locales 
 
 
@@ -96,5 +115,8 @@ Para ver los artefactos y metricas en MLFlow local ejecuta:
 mlflow ui
 ```
 ## Comentarios:
+
+Dado que para el despliegue en prod se requieren de multiples credenciales (API Keys de AWS, Prefect, data sources y Dagshub), los archivos .py que se sugierieron ejecutar son versiones simplificadas para correr en local de los pipelines diseñados para producción. Los archivos principales son mlops_retraining_job.py y mlops_batch_inference_job.py, los cuales se configuran en los .yml de Github Actions para ser automaticamente ejecutados.
+
 
 

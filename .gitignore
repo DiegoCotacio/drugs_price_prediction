@@ -128,6 +128,10 @@ ENV/
 env.bak/
 venv.bak/
 
+# Ignorar carpetas en la raíz del repositorio
+mlruns/
+catboost_info/
+
 # Spyder project settings
 .spyderproject
 .spyproject

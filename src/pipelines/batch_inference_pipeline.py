@@ -50,7 +50,7 @@ def generate_batch_predictions(df: pd.DataFrame) -> pd.DataFrame:
         input_list = input_df.to_dict(orient='records')
         
         #API_ENDPOINT = "http://127.0.0.1:8000/batch_predict_pipeline"
-        API_ENDPOINT = "https://jjnw2oyoolgt4dp7cxbh2cmbyu0bjpzf.lambda-url.us-east-2.on.aws/batch_predict_pipeline"
+        API_ENDPOINT = "https://3vr4qseoy37cebds3fko6hpldm0xudrw.lambda-url.us-east-2.on.aws//batch_predict_pipeline"
 
         
         response = requests.post(API_ENDPOINT, json=input_list)

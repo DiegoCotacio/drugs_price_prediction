@@ -25,7 +25,7 @@ jobs:
 
     - name: Run training_pipeline.py
       run: |
-        python src/components/training_pipeline.py
+        python src/pipelines/mlops_retraining_job.py
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -42,7 +42,7 @@ jobs:
       id: build-custom-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: ml-cicd-testing
+        ECR_REPOSITORY: rurall_cicd_deployment
         IMAGE_TAG: latest
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG . 
@@ -53,10 +53,11 @@ jobs:
       id: update-custom-function-code
       env:
         IMAGE_TAG: latest
-        AWS_LAMBDA_FUNC_NAME: ml-cicd-testing
+        AWS_LAMBDA_FUNC_NAME: rurall_cicd_deployment
         AWS_ACCESS_KEY_ID : ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY : ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION : us-east-2
-        role-to-assume: arn:aws:iam::193194117892:role/service-role/ml-cicd-testing-role-g3nc3y0o
+        role-to-assume: arn:aws:iam::193194117892:role/service-role/rurall_api-role-2n5lf1pg
+        
       run: |
-        aws lambda update-function-code --function-name ${{env.AWS_LAMBDA_FUNC_NAME}} --image-uri "${{secrets.AWS_ECR_IMAGE_URI}}:$IMAGE_TAG"
+        aws lambda update-function-code --function-name ${{ env.AWS_LAMBDA_FUNC_NAME }} --image-uri "${{ secrets.AWS_ECR_IMAGE_URI }}:$IMAGE_TAG"

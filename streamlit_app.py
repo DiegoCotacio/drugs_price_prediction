@@ -9,8 +9,8 @@ import json
 #PREDICT_ENDPOINT = 'http://127.0.0.1:8000/online_predict'
 #BATCH_PREDICT_ENDPOINT = 'http://127.0.0.1:8000/online_batch_predict'
 
-PREDICT_ENDPOINT = 'https://jjnw2oyoolgt4dp7cxbh2cmbyu0bjpzf.lambda-url.us-east-2.on.aws/online_predict'
-BATCH_PREDICT_ENDPOINT = 'https://jjnw2oyoolgt4dp7cxbh2cmbyu0bjpzf.lambda-url.us-east-2.on.aws/online_batch_predict'
+PREDICT_ENDPOINT = 'https://3vr4qseoy37cebds3fko6hpldm0xudrw.lambda-url.us-east-2.on.aws/online_predict'
+BATCH_PREDICT_ENDPOINT = 'https://3vr4qseoy37cebds3fko6hpldm0xudrw.lambda-url.us-east-2.on.aws/online_batch_predict'
 
 
 def predict_input(input_data):
