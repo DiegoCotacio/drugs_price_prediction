@@ -5,12 +5,12 @@ import requests
 import io
 import json
 
-# Desmarcar para realizar predicciones con la API desplegada en AWS
-#API_URL = 'https://66zl2vyt7uvasnujluqwmdfepy0pciao.lambda-url.us-east-2.on.aws/'
-API_URL = 'http://127.0.0.1:8000'
+# Desmarcar para realizar predicciones con el modelo reentrenado (marca las URL de AWS)
+#PREDICT_ENDPOINT = 'http://127.0.0.1:8000/online_predict'
+#BATCH_PREDICT_ENDPOINT = 'http://127.0.0.1:8000/online_batch_predict'
 
-PREDICT_ENDPOINT = 'http://127.0.0.1:8000/online_predict'
-BATCH_PREDICT_ENDPOINT = '/online_batch_predict'
+PREDICT_ENDPOINT = 'https://jjnw2oyoolgt4dp7cxbh2cmbyu0bjpzf.lambda-url.us-east-2.on.aws/online_predict'
+BATCH_PREDICT_ENDPOINT = 'https://jjnw2oyoolgt4dp7cxbh2cmbyu0bjpzf.lambda-url.us-east-2.on.aws/online_batch_predict'
 
 
 def predict_input(input_data):
@@ -40,7 +40,7 @@ def run():
         "Indica un metodo para realizar predicciones",
         ("Online", "Batch"))
     
-    st.sidebar.info("Esta app permite predecir costos de hospitalizaicón para Pacientes")
+    st.sidebar.info("UI para predecir Precios de Farmacos")
     st.sidebar.success("")
     #st.sidebar.image(image_hospital)
 
@@ -116,7 +116,7 @@ def run():
         if file_upload is not None:
             if st.button('Estimar precio del farmaco'):
 
-             response = requests.post(API_URL + BATCH_PREDICT_ENDPOINT, files={'file': file_upload})
+             response = requests.post(BATCH_PREDICT_ENDPOINT, files={'file': file_upload})
              if response.status_code == 200:
                  data = response.json()
                  df = pd.DataFrame(data)

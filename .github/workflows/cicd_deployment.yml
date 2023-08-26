@@ -1,0 +1,62 @@
+name: CI/CD Continuous deployment
+
+on:
+  workflow_dispatch: # trigger manual
+
+jobs:
+  build:
+
+    name: Retrain model, package API, push Docker image to ECR and deploy to Lambda Function
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.10'
+    
+    - name: Install dependencies
+      run: |
+          pip install -r requirements.txt
+
+    - name: Run training_pipeline.py
+      run: |
+        python src/components/training_pipeline.py
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-2
+        
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Build, tag, and push image to Amazon ECR
+      id: build-custom-image
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: ml-cicd-testing
+        IMAGE_TAG: latest
+      run: |
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG . 
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+    
+    - name: Deploy to AWS Lambda
+      id: update-custom-function-code
+      env:
+        IMAGE_TAG: latest
+        AWS_LAMBDA_FUNC_NAME: ml-cicd-testing
+        AWS_ACCESS_KEY_ID : ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY : ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION : us-east-2
+        role-to-assume: arn:aws:iam::193194117892:role/service-role/ml-cicd-testing-role-g3nc3y0o
+      run: |
+        aws lambda update-function-code --function-name ${{env.AWS_LAMBDA_FUNC_NAME}} --image-uri "${{secrets.AWS_ECR_IMAGE_URI}}:$IMAGE_TAG"

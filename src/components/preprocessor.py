@@ -121,6 +121,7 @@ class FeatureEngineering:
 
         try:
             numeric_cols = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
+            numeric_cols.remove('price')
             scaler = MinMaxScaler()
             df[numeric_cols] = scaler.fit_transform(df[numeric_cols])
             return df

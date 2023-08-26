@@ -1,0 +1,76 @@
+route_of_administration,main_route_of_administration
+auriculaire,Autre
+"auriculaire,gingivale,nasale,voie buccale autre",Autre
+buccogingivale,Autre
+cutanée,Cutanée
+"cutanée,transdermique",Cutanée
+dentaire,Cutanée
+"endocanalaire,intra cholangio-pancréatique,intra-artérielle,intraveineuse",Intraveineuse
+"endocanalaire,intra cholangio-pancréatique,intra-articulaire,intra-artérielle,intra-utérine,intraveineuse",Autre
+"endocanalaire,intra-artérielle,intraveineuse",Autre
+"endocanalaire,intra-articulaire,intra-artérielle,intra-utérine,intrathécale,intraveineuse",Autre
+"endocanalaire,intra-articulaire,intra-artérielle,intra-utérine,intraveineuse",Intraveineuse
+"endosinusale,intra-articulaire,intradurale,intralésionnelle,périarticulaire,péridurale,périoculaire,voie parentérale autre",Autre
+"endosinusale,intra-articulaire,intralésionnelle,intramusculaire,intraveineuse,périarticulaire,périoculaire",Autre
+"endosinusale,intra-articulaire,intralésionnelle,intramusculaire,intraveineuse,périarticulaire,périoculaire,voie parentérale autre",Autre
+"endosinusale,intra-articulaire,intralésionnelle,intramusculaire,périarticulaire",Autre
+"gastrique,orale",orale
+"gastro-entérale,orale",orale
+gingivale,Autre
+"gingivale,voie buccale autre",Autre
+"infiltration,intra-articulaire,intraveineuse,périarticulaire,péridurale,périneurale",Autre
+"infiltration,intra-articulaire,périarticulaire,péridurale,périneurale",Autre
+"infiltration,intradermique,périneurale,sous-cutanée",Autre
+"infiltration,péridurale,périneurale",Autre
+inhalée,ophtalmique
+"inhalée,intramusculaire,intraveineuse",Autre
+"intra-artérielle,intra-utérine,intraveineuse",Intraveineuse
+"intra-artérielle,intraséreuse,intraveineuse",Intraveineuse
+"intra-artérielle,intrathécale,intraveineuse",Autre
+"intra-artérielle,intrathécale,intraveineuse,orale,rectale",Autre
+"intra-artérielle,intraveineuse",Intraveineuse
+"intra-artérielle,intraveineuse,intravésicale",Intraveineuse
+intra-articulaire,Autre
+"intra-articulaire,intra-artérielle,intra-utérine,intrathécale,intraveineuse,orale,rectale",Intraveineuse
+"intra-articulaire,intra-artérielle,intra-utérine,intraveineuse",Intraveineuse
+"intra-articulaire,intra-artérielle,intra-utérine,intraveineuse,orale,rectale",Autre
+"intra-articulaire,intra-artérielle,intrathécale,intraveineuse",Autre
+"intra-articulaire,intra-artérielle,intraveineuse",Autre
+"intra-articulaire,intralésionnelle,intramusculaire",Autre
+"intra-articulaire,périarticulaire,péridurale,voie parentérale autre",Autre
+"intra-murale,intramusculaire,intraveineuse",Intraveineuse
+intra-utérine,Autre
+intracaverneuse,Autre
+intradermique,Cutanée
+intramusculaire,Intramusculaire
+"intramusculaire,intrapéritonéale,intraveineuse,sous-cutanée",Intramusculaire
+"intramusculaire,intrathécale,intraveineuse",Intramusculaire
+"intramusculaire,intraveineuse",Intramusculaire
+"intramusculaire,intraveineuse,orale",Intramusculaire
+"intramusculaire,intraveineuse,rectale",Intramusculaire
+"intramusculaire,intraveineuse,sous-cutanée",Intramusculaire
+"intramusculaire,orale",Intramusculaire
+"intramusculaire,sous-cutanée",Intramusculaire
+intrathécale,Autre
+"intrathécale,intraveineuse",Intraveineuse
+"intrathécale,intraveineuse,intraventriculaire cérébrale,péridurale,sous-cutanée",Autre
+"intrathécale,intraveineuse,sous-cutanée",Intraveineuse
+intraveineuse,Intraveineuse
+"intraveineuse,orale",Intraveineuse
+"intraveineuse,sous-cutanée",Intraveineuse
+"intraveineuse,voie extracorporelle autre",Intraveineuse
+intravésicale,Autre
+intravitréenne,Autre
+nasale,Autre
+ophtalmique,ophtalmique
+orale,orale
+"orale,rectale",orale
+"orale,vaginale",orale
+rectale,Autre
+sous-cutanée,Autre
+"sous-cutanée,voie extracorporelle autre",Autre
+sublinguale,orale
+transdermique,Cutanée
+vaginale,Autre
+voie buccale autre,Autre
+voie extracorporelle autre,Autre

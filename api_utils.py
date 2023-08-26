@@ -13,28 +13,15 @@ from datetime import datetime
 import pandas as pd
 import numpy as np
 import pickle
+import logging
 
-from src.exception import CustomException
-from src.logger import logging
-#from src.utils import save_object
 
 @dataclass
 class DataTransformationConfig:
-    proc_data_path = os.path.join('artifacts', 'processed_data.csv')
-
+    pass
 
 class PreprocessData:
    
-    def remove_duplicates(self, df: pd.DataFrame) -> pd.DataFrame:
-        try:
-            df.drop_duplicates(inplace=True)
-            return df
-        
-        except Exception as e:
-            logging.error(e)
-            raise e
-    
-
     def impute_missing_values(self, df: pd.DataFrame) -> pd.DataFrame:
 
         try:
@@ -169,15 +156,14 @@ class Preprocessor(PreprocessData, FeatureEngineering):
         
         return df
 
-    def preprocess_dataframe(self, df):
+    def preprocess_dataframe(self, input_df):
 
-        df = self.format_dtypes(df)
+        df = self.format_dtypes(input_df)
         enriched_df = self.feature_enrichment(df)
         engineered_df = self.feature_engineering(enriched_df)
         normalized_df = self.normalize_numeric_features(engineered_df)
         dropped_df = self.drop_columns(normalized_df)
-        deduplicated_df = self.remove_duplicates(dropped_df)
-        preprocessed_df = self.impute_missing_values(deduplicated_df)
+        preprocessed_df = self.impute_missing_values(dropped_df)
 
         return preprocessed_df 
 
@@ -189,5 +175,6 @@ def load_object(file_path):
             return pickle.load(file_obj)
     
     except Exception as e:
-        raise CustomException(e,sys)
+        logging.error(e)
+        raise e
     

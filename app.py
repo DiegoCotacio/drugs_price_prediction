@@ -39,7 +39,7 @@ Out API contains 3 endpoints, each one for 3 deployment variations:
 # ------- Upload artifacts
 
 #model
-model_path = os.path.join("artifacts", "model.pkl")
+model_path = os.path.join("api_artifacts", "model.pkl")
 model = load_object(file_path= model_path)
 
 
