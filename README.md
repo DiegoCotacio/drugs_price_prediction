@@ -5,10 +5,41 @@ Sigue los siguientes pasos:
 
 ### 1. Clona el Repositorio
 
-Primero, clona este repositorio en tu máquina local utilizando el siguiente comando:
+Primero, clona el repo para correr en local:
 
 ```bash
 git clone https://github.com/DiegoCotacio/drugs_price_prediction.git
+```
+```bash
+📦 repository_name
+ ┣ 📂 .github/workflows
+ ┣ 📂 .gitignore
+ ┣ 📂 .prueba_tecnica_rurall.egg-info
+ ┣ 📂 data
+ ┣ 📂 notebooks
+ ┣ 📂 training_reports
+ ┣ 📂 src
+ ┃ ┣ 📂 components
+ ┃ ┃ ┣ 📜 data_ingestion.py
+ ┃ ┃ ┣ 📜 preprocessor.py
+ ┃ ┃ ┣ 📜 hyp_optimizer.py
+ ┃ ┃ ┣ 📜 model_evaluation.py
+ ┃ ┃ ┗ 📜 reports.py
+ ┃ ┣ 📂 pipelines
+ ┃ ┃ ┣ 📜 batch_inference_pipeline.py
+ ┃ ┃ ┗ 📜 training_pipeline.py
+ ┃ ┣ 📜 __init__.py
+ ┃ ┣ 📜 exception.py
+ ┃ ┣ 📜 logger.py
+ ┃ ┗ 📜 utils.py
+ ┣ 📂 api_artifacts
+ ┣ 📂 app.py
+ ┣ 📂 api_utils.py
+ ┣ 📂 Dockerfile
+ ┣ 📂 requirements.txt
+ ┗ 📂 streamlit_app.py
+ ┣ 📜 README.md
+ ┗ 📜 setup.py
 ```
 
 ### 3. Instala las dependencias
@@ -18,6 +49,7 @@ pip install -r requirements.txt
 ```
 
 ### 3. Genera predicciones
+
 
 El repo ya cuenta con un modelo entrenado, empaquetado en una API y desplegado en una Imagen Docker en AWS ECR y servido en una Lambda. Ejecuta el siguiente comando para generar las predicciones en el archivo drugs_test.csv. En el folder "/data" 
 podras encontrar los resultados en el archivo "prediction_outputs.csv"
