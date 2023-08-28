@@ -26,6 +26,8 @@ Sigue los siguientes pasos:
 
 Primero, clona el repo para correr en local:
 
+Deberas tener instalado un IDE para poder ejecutar los scripts. Recomiendo Visual Studio Code.
+
 ```bash
 git clone https://github.com/DiegoCotacio/drugs_price_prediction.git
 ```
@@ -68,6 +70,9 @@ git clone https://github.com/DiegoCotacio/drugs_price_prediction.git
 ```
 
 ### 2. Instala las dependencias
+
+Antes de instalar las librerias te recomiendo crear un entorno virtual y activarlo.
+Puede usar **python -m venv env** para Windows.
 
 ```bash
 pip install -r requirements.txt
@@ -114,6 +119,14 @@ Para ver los artefactos y metricas en MLFlow local ejecuta:
 ```bash
 mlflow ui
 ```
+Si deseas probar el modelo desde la API de Fast API en loca, puedes ejecutar el siguiente comando y abrir url en /docs:
+
+```bash
+uvicorn app:app --reload
+```
+
+Con esto podras probar el modelo reentrenado en los endpoints de Streamlit o en batch predictions desmarcando primero los # de local y marcando las URL.
+
 ## Comentarios:
 
 Dado que para el despliegue en prod se requieren de multiples credenciales (API Keys de AWS, Prefect, data sources y Dagshub), los archivos .py que se sugierieron ejecutar son versiones simplificadas para correr en local de los pipelines diseñados para producción. Los archivos principales son mlops_retraining_job.py y mlops_batch_inference_job.py, los cuales se configuran en los .yml de Github Actions para ser automaticamente ejecutados.

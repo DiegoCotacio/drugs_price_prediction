@@ -1,0 +1,8 @@
+README.md
+setup.py
+prueba_tecnica_rurall.egg-info/PKG-INFO
+prueba_tecnica_rurall.egg-info/SOURCES.txt
+prueba_tecnica_rurall.egg-info/dependency_links.txt
+prueba_tecnica_rurall.egg-info/requires.txt
+prueba_tecnica_rurall.egg-info/top_level.txt
+src/__init__.py
