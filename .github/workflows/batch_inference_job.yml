@@ -1,4 +1,4 @@
-name: Insurance Data Generation
+name: batch inference service for price prediction
 
 on:
   schedule:
@@ -26,5 +26,5 @@ jobs:
         prefect config set PREFECT_API_KEY=${{secrets.PREFECT_API_KEY}} 
         prefect cloud workspace set --workspace "${{secrets.PREFECT_WORKSPACE}}"
 
-    - name: Run Insurance Data Generation
+    - name: Run batch inference service
       run: python src/pipelines/mlops_batch_inference_job.py
